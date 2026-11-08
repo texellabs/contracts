@@ -1,0 +1,16 @@
+# The contracts of Texel on Robinhood Chain: TexelReceipts keeps the hourly roots of the
+# onchain receipts, and TexelEarn pays tokenized NVDA to every wallet with $TEXEL.
+[profile.default]
+src = "src"
+test = "test"
+out = "out"
+libs = ["lib"]
+# Pinned. Robinhood Chain runs ArbOS 61 (arbOSVersion() answered 116, that is 55 + 61,
+# on 7 Nov 2026), and ArbOS 20 and later take Cancun.
+solc_version = "0.8.30"
+evm_version = "cancun"
+optimizer = true
+optimizer_runs = 10000
+
+[fuzz]
+runs = 1024
