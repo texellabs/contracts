@@ -6,6 +6,7 @@ The contracts of [Texel](https://texel.run), the onchain GPU cloud on Robinhood 
 |---|---|---|
 | `TexelReceipts` | [`0x48c545Fdd2Ea5b286B319F03575683019C2f1EF5`](https://robin.etherscan.io/address/0x48c545Fdd2Ea5b286B319F03575683019C2f1EF5) | Keeps one Merkle root for each UTC hour of receipts. |
 | `TexelEarn` | [`0x8722779110FC73d9d6f189843FC48F7cd04238BC`](https://robin.etherscan.io/address/0x8722779110FC73d9d6f189843FC48F7cd04238BC) | Pays tokenized NVDA to every wallet with $TEXEL. |
+| `TexelDeposits` | [`0x69d11407269d7949cb7652a8Ca6B65f31E1fc6C4`](https://robin.etherscan.io/address/0x69d11407269d7949cb7652a8Ca6B65f31E1fc6C4) | Takes the USDG that buys Texel credits and sends it on to the treasury. |
 
 $TEXEL is [`0x0ddcab9ae04bda0c87ecc1640636fa11e8e613e8`](https://robin.etherscan.io/token/0x0ddcab9ae04bda0c87ecc1640636fa11e8e613e8).
 
@@ -20,6 +21,14 @@ and their count. An hour is sealed once and never changes, so a receipt changed 
 the chain. The contract holds no money, has no owner, and cannot be upgraded.
 
 Every sealed hour is on [texel.run/receipts](https://texel.run/receipts).
+
+## TexelDeposits
+
+A wallet buys Texel credits by sending USDG to this contract in one plain transfer, with no
+approval and no signature. The gateway of Texel reads each Transfer of USDG to the contract and adds
+the credits to the wallet that sent it. Anyone can call `forward`, which sends all of a token that
+the contract holds to the treasury, the one place a token can leave to. USDG and the treasury are
+fixed at the deploy. The contract has no owner, refuses ETH, and cannot be upgraded.
 
 ## TexelEarn
 
@@ -51,10 +60,16 @@ forge build
 forge test
 ```
 
-The fork test runs `TexelEarn` against the real tokenized NVDA of Robinhood Chain:
+The fork test of `TexelEarn` runs it against the real tokenized NVDA of Robinhood Chain:
 
 ```sh
 EARN_FORK_URL=https://rpc.mainnet.chain.robinhood.com forge test --match-contract Fork
+```
+
+The fork test of `TexelDeposits` sends the real USDG of Robinhood Chain through it:
+
+```sh
+DEPOSITS_FORK_URL=https://rpc.mainnet.chain.robinhood.com forge test --match-contract TexelDepositsFork
 ```
 
 ## License
