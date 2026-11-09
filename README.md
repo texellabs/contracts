@@ -32,6 +32,17 @@ the credits to the wallet that sent it. Anyone can call `forward`, which sends a
 the contract holds to the treasury, the one place a token can leave to. USDG and the treasury are
 fixed at the deploy. The contract has no owner, refuses ETH, and cannot be upgraded.
 
+## TexelRefunds
+
+A wallet that does not use its Texel credits gets back the USDG they cost. The treasury keeps USDG in
+this contract for refunds. When a wallet asks for a refund, the gateway of Texel takes its unused
+credits, and the operator, the gas wallet of the gateway, sends the USDG from here to that wallet,
+with one id for each refund. The wallet signs nothing and pays no gas.
+
+The operator can only pay refunds: each id pays once, only from the USDG the contract holds. Only the
+treasury can take tokens back, and only to itself. USDG, the treasury, and the operator are fixed at
+the deploy. The contract has no owner, refuses ETH, and cannot be upgraded.
+
 ## TexelEarn
 
 Every wallet with $TEXEL gets tokenized NVDA, split by how much $TEXEL it held over each round. Each
@@ -72,6 +83,13 @@ The fork test of `TexelDeposits` sends the real USDG of Robinhood Chain through 
 
 ```sh
 DEPOSITS_FORK_URL=https://rpc.mainnet.chain.robinhood.com forge test --match-contract TexelDepositsFork
+```
+
+The fork test of `TexelRefunds` pays a refund in the real USDG of Robinhood Chain and sends the rest back
+to the treasury:
+
+```sh
+DEPOSITS_FORK_URL=https://rpc.mainnet.chain.robinhood.com forge test --match-contract TexelRefundsFork
 ```
 
 ## License

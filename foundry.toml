@@ -1,6 +1,7 @@
 # The contracts of Texel on Robinhood Chain: TexelReceipts keeps the hourly roots of the
-# onchain receipts, TexelEarn pays tokenized NVDA to every wallet with $TEXEL, and
-# TexelDeposits takes the USDG that buys Texel credits and sends it on to the treasury.
+# onchain receipts, TexelEarn pays tokenized NVDA to every wallet with $TEXEL,
+# TexelDeposits takes the USDG that buys Texel credits and sends it on to the treasury, and
+# TexelRefunds pays unused credits back to their wallet in USDG.
 [profile.default]
 src = "src"
 test = "test"
