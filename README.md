@@ -2,6 +2,8 @@
 
 The contracts of [Texel](https://texel.run), the onchain GPU cloud on Robinhood Chain.
 
+[![Texel on HEY Research Lab](https://heyresearch.xyz/api/badge/texel?style=pill)](https://heyresearch.xyz/project/texel?utm_source=badge&utm_medium=readme)
+
 | Contract | Address on Robinhood Chain | What it does |
 |---|---|---|
 | `TexelReceipts` | [`0x48c545Fdd2Ea5b286B319F03575683019C2f1EF5`](https://robin.etherscan.io/address/0x48c545Fdd2Ea5b286B319F03575683019C2f1EF5) | Keeps one Merkle root for each UTC hour of receipts. |
