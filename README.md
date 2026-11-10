@@ -44,6 +44,25 @@ The operator can only pay refunds: each id pays once, only from the USDG the con
 treasury can take tokens back, and only to itself. USDG, the treasury, and the operator are fixed at
 the deploy. The contract has no owner, refuses ETH, and cannot be upgraded.
 
+## TexelCredits
+
+TexelCredits holds the deposits of `TexelDeposits` and the refunds of `TexelRefunds` in one
+contract. A wallet buys Texel credits by sending USDG or $TEXEL to it in one plain transfer, with no
+approval and no signature. A wallet that pays in another token, such as ETH, swaps it through
+Uniswap in the same transaction, and the swap sends the USDG here. The gateway of Texel reads each
+payment and adds the credits to the wallet that paid.
+
+The USDG of unused credits stays in the contract, so every refund has the USDG to pay from. The
+operator, the gas wallet of the gateway, can pay a refund in the token the credits were bought
+with, each id once; send the USDG of used credits on to the treasury; and send the $TEXEL of used
+credits to the burn address. A refund and a burn count against the daily cap of their token, the
+most of it that may leave in one UTC day, and a token with no cap cannot be refunded. The wallet
+signs nothing and pays no gas for its refund.
+
+The treasury can take any token back to itself, set the daily cap of a token, and set the operator,
+or set none to stop it. USDG, $TEXEL, and the treasury are fixed at the deploy. The contract has no
+owner, refuses ETH, and cannot be upgraded.
+
 ## TexelEarn
 
 Every wallet with $TEXEL gets tokenized NVDA, split by how much $TEXEL it held over each round. Each
@@ -91,6 +110,13 @@ to the treasury:
 
 ```sh
 DEPOSITS_FORK_URL=https://rpc.mainnet.chain.robinhood.com forge test --match-contract TexelRefundsFork
+```
+
+The fork test of `TexelCredits` pays in the real USDG and $TEXEL of Robinhood Chain and in ETH
+through the Universal Router of Uniswap, then pays refunds, forwards USDG, and burns $TEXEL:
+
+```sh
+DEPOSITS_FORK_URL=https://rpc.mainnet.chain.robinhood.com forge test --match-contract TexelCreditsFork
 ```
 
 ## License
