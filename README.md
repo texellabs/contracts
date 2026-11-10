@@ -9,6 +9,7 @@ The contracts of [Texel](https://texel.run), the onchain GPU cloud on Robinhood 
 | `TexelReceipts` | [`0x48c545Fdd2Ea5b286B319F03575683019C2f1EF5`](https://robin.etherscan.io/address/0x48c545Fdd2Ea5b286B319F03575683019C2f1EF5) | Keeps one Merkle root for each UTC hour of receipts. |
 | `TexelEarn` | [`0x8722779110FC73d9d6f189843FC48F7cd04238BC`](https://robin.etherscan.io/address/0x8722779110FC73d9d6f189843FC48F7cd04238BC) | Pays tokenized NVDA to every wallet with $TEXEL. |
 | `TexelDeposits` | [`0x69d11407269d7949cb7652a8Ca6B65f31E1fc6C4`](https://robin.etherscan.io/address/0x69d11407269d7949cb7652a8Ca6B65f31E1fc6C4) | Takes the USDG that buys Texel credits and sends it on to the treasury. |
+| `TexelRefunds` | [`0x1497ef86Fc21E06FcAACe3A2Ef1e05C836cd07d4`](https://robin.etherscan.io/address/0x1497ef86Fc21E06FcAACe3A2Ef1e05C836cd07d4) | Pays unused Texel credits back to their wallet in USDG. |
 
 $TEXEL is [`0x0ddcab9ae04bda0c87ecc1640636fa11e8e613e8`](https://robin.etherscan.io/token/0x0ddcab9ae04bda0c87ecc1640636fa11e8e613e8).
 
